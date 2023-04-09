@@ -36,6 +36,7 @@ jobs:
         echo "${{ github.event.event_id }}"
         echo "${{ github.event.name }}"
         echo "${{ github.event.issue_number }}"
+        echo "${{ github.event.number }}"
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
