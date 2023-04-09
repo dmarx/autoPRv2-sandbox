@@ -14,5 +14,29 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Run a one-line script
-      run: echo Hello, world!
+        
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+        #cache: 'pip'
+
+    - name: Install dependencies
+      run: pip install omegaconf openai
+      
+#     - name: Run draw_owl.py
+#       run: python draw_owl.py
+#       env:
+#         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+    - name: Install dependencies
+      run: | 
+        echo "do the thing"
+        echo ${{ github.event.id }}
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        commit-message: LLM auto-completed.
+        branch: llm-autocompletion
+        branch-suffix: ${{ github.event.label.name }}
