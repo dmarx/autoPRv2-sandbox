@@ -27,9 +27,11 @@ jobs:
     - name: Do the thing
       run: | 
         echo "Issue number: ${{ github.event.issue.number }}"
+        echo "Issue title: ${{ github.event.issue.title }}"
+        echo "Issue body: ${{ github.event.issue.body }}"
         echo "do the thing"
-      env:
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      #env:
+      #  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
