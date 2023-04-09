@@ -1,7 +1,7 @@
 name: CI
 
 on:
-  issue:
+  issues:
     types: [ labeled ]
 
 env:
