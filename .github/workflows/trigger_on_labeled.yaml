@@ -26,22 +26,18 @@ jobs:
       
 #     - name: Run draw_owl.py
 #       run: python draw_owl.py
-#       env:
-#         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
 
     - name: Do the thing
       run: | 
+        echo "Issue number: ${{ github.event.issue.number }}"
         echo "do the thing"
-        echo "${{ github.event.id }}"
-        echo "${{ github.event.event_id }}"
-        echo "${{ github.event.name }}"
-        echo "${{ github.event.issue_number }}"
-        echo "${{ github.event.number }}"
-        echo "${{ github.event.issue.number }}"
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
       with:
         commit-message: LLM auto-completed.
         branch: llm-autocompletion
-        branch-suffix: timestamp
+        branch-suffix: ${{ github.event.issue.number }}
