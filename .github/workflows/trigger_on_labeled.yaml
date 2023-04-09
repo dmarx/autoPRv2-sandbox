@@ -32,11 +32,12 @@ jobs:
     - name: Install dependencies
       run: | 
         echo "do the thing"
-        echo ${{ github.event.id }}
+        #echo ${{ github.event.id }}
+        echo ${{ github.event.event_id }}
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
       with:
         commit-message: LLM auto-completed.
         branch: llm-autocompletion
-        branch-suffix: ${{ github.event.label.name }}
+        branch-suffix: timestamp
