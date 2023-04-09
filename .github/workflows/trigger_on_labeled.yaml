@@ -22,11 +22,7 @@ jobs:
         #cache: 'pip'
 
     - name: Install dependencies
-      run: pip install omegaconf openai
-      
-#     - name: Run draw_owl.py
-#       run: python draw_owl.py
-
+      run: pip install loguru omegaconf openai
 
     - name: Do the thing
       run: | 
