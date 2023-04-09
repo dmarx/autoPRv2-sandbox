@@ -32,8 +32,9 @@ jobs:
     - name: Install dependencies
       run: | 
         echo "do the thing"
-        #echo ${{ github.event.id }}
-        echo ${{ github.event.event_id }}
+        echo "${{ github.event.id }}"
+        echo "${{ github.event.event_id }}"
+        echo "${{ github.event.name }}"
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
