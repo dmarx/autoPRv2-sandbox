@@ -29,12 +29,13 @@ jobs:
 #       env:
 #         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
-    - name: Install dependencies
+    - name: Do the thing
       run: | 
         echo "do the thing"
         echo "${{ github.event.id }}"
         echo "${{ github.event.event_id }}"
         echo "${{ github.event.name }}"
+        echo "${{ github.event.issue_number }}"
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
