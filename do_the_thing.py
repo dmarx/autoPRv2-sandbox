@@ -1,19 +1,18 @@
 import sys
 import json
+from loguru import logger
+
+def prompt_from_issue(issue: dict):
+    """
+    Given a github issue object, returns a simplified prompt.
+    """
+    return f"issue title: {issue['title']}\nissue description: {issue['body']}"
+    
 
 if __name__ == '__main__':
-    #args = sys.argv[1:]
-    issue_json = json.loads(sys.argv[1])
-    #print(issue_json)
-    
-    title = issue_json['title']
-    body = issue_json['body']
-    author_role = issue_json['author_association'] #"author_association": "OWNER",
-    
+    issue = json.loads(sys.argv[1])
+    author_role = issue['author_association']
     if author_role != 'OWNER':
         exit()
-    
-    prompt = f"issue title: {title}\nissue description: {body}"
-    print("<prompt>")
-    print(prompt)
-    print("</prompt>")
+    prompt = prompt_from_issue(issue)
+    logger.info(f"<prompt>{prompt}</prompt>")
