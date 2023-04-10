@@ -6,6 +6,7 @@ import sys
 import json
 from loguru import logger
 from utils import map_project
+from pathlib import Path
 
 def prompt_from_issue(issue: dict):
     """
