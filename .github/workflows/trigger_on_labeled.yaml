@@ -32,7 +32,7 @@ jobs:
       run: | 
         echo "Issue number: ${{ github.event.issue.number }}"
         echo "do the thing"
-        python do_the_thing.py '$ISSUE_PAYLOAD'
+        python do_the_thing.py "${ISSUE_PAYLOAD}"
       env:
         ISSUE_PAYLOAD: ${{ toJson(github.event.issue) }}
       #  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
