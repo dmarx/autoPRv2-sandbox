@@ -24,16 +24,17 @@ jobs:
     - name: Install python dependencies
       run: pip install loguru omegaconf openai
 
-    # apparently we need this to properly format the json...
-    - name: Install jq
-      run: sudo apt-get update && sudo apt-get install -y jq
+#     # apparently we need this to properly format the json...
+#     - name: Install jq
+#       run: sudo apt-get update && sudo apt-get install -y jq
 
     - name: Do the thing
       run: | 
         echo "Issue number: ${{ github.event.issue.number }}"
         echo "do the thing"
-        python do_the_thing.py '${{ toJson(github.event.issue) }}'
-      #env:
+        python do_the_thing.py '$ISSUE_PAYLOAD'
+      env:
+        ISSUE_PAYLOAD: ${{ toJson(github.event.issue) }}
       #  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     - name: Create Pull Request
