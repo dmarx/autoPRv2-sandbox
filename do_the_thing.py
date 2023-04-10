@@ -13,9 +13,17 @@ def prompt_from_issue(issue: dict):
     return prompt
 
 
-def extract_functions(source)
+def extract_functions(source):
+    """
+    Given a string of source code, extract the names and arguments of all functions defined in that source code.
+
+    1. Parse the source code string into an Abstract Syntax Tree (AST) using the built-in `ast.parse()` function.
+    2. Use the built-in `ast.walk()` function to traverse the AST and identify all `FunctionDef` nodes.
+    3. For each `FunctionDef` node, extract the name of the function and the names of its arguments using the `node.name` and `node.args.args` attributes, respectively.
+    4. Return a list of strings, where each string represents the name of a function followed by a comma-separated list of its arguments.
+    """
     functions = []
-    for node in ast.walk(ast.parse(f.read())):
+    for node in ast.walk(ast.parse(source)):
         if isinstance(node, ast.FunctionDef):
             functions.append(f"{node.name}({', '.join(arg.arg for arg in node.args.args)})")
     return functions
