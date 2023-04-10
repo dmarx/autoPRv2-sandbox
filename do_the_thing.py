@@ -19,6 +19,8 @@ class Agent:
     def __init__(self, issue):
         self.issue = issue
         self.directive = prompt_from_issue(issue)
+        self.history = []
+        self.state = {"directive": self.directive}  # keys: directive, plan
     def address_issue(self):
         self.make_a_plan()
         #self.step_through_plan()
