@@ -4,6 +4,9 @@ not clutter or distract from the workhorse code where they are used, or to desig
 functions as potentially generally useful outside of this project.
 """
 
+import ast
+from pathlib import Path
+
 def extract_functions(source: str) -> list:
     """
     Given a string of source code, extract the names and arguments of all functions defined in that source code.
