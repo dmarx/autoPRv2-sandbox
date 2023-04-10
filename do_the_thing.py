@@ -1,3 +1,5 @@
+import ast
+
 import sys
 import json
 from loguru import logger
@@ -9,6 +11,34 @@ def prompt_from_issue(issue: dict):
     prompt = f"issue title: {issue['title']}\nissue description: {issue['body']}"
     logger.info(f"<prompt>{prompt}</prompt>")
     return prompt
+
+
+def extract_functions(source)
+    functions = []
+    for node in ast.walk(ast.parse(f.read())):
+        if isinstance(node, ast.FunctionDef):
+            functions.append(f"{node.name}({', '.join(arg.arg for arg in node.args.args)})")
+    return functions
+
+
+ def map_project():
+    mapping = {}
+    for file in Path('.').rglob('*.*'):
+        with open(file) as f:
+            source = f.read()
+        num_tokens = len(source)
+        functions = extract_functions(source)
+        docstring = ast.get_docstring(ast.parse(source))
+
+        record = f"relative path: {file.relative_to(Path.cwd())}\n" \
+                 f"number of tokens: {num_tokens}\n"
+        if docstring:
+            record += f"docstring: {docstring}\n"
+        record += f"functions: {', '.join(functions)}\n"
+
+        mapping[file.stem] = record
+   return mapping
+
     
 # this is gonna be a super spaghetti code way of doing things but it might be a helpful way to keep information
 # within a helpfully readable context for the LLM
@@ -20,29 +50,19 @@ class Agent:
         self.state = {"directive": self.directive}  # keys: directive, plan
 
     def address_issue(self):
-        self.summarize_directive()
         self.make_a_plan()
         self.step_through_plan()
         self.validate_solution()
         self.submit_pr()
 
-    def summarize_directive(self):
-        def summarize(directive):
-            prompt = f"Please restate the following GitHub issue as a directive:\n\n{directive}"
-            response = generate_response(prompt)
-            summarized_directive = response.choices[0].text.strip()
-            return summarized_directive
-
-        self.state['directive'] = summarize(self.state['directive'])
-        self.history.append({'directive': self.state['directive']})
-
+        
     def make_a_plan(self):
         def think_through(directive):
             prompt = f"Please generate a plan to address the following directive:\n\n{directive}"
             response = generate_response(prompt)
             plan = response.choices[0].text.strip()
             return plan
-
+        self.state['project_map'] = map_project()
         self.state['plan'] = think_through(self.state['directive'])
         self.history.append({'plan': self.state['plan']})
 
