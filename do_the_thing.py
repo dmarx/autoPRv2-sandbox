@@ -16,4 +16,4 @@ if __name__ == '__main__':
     prompt = f"issue title: {title}\nissue description: {body}"
     print("<prompt>")
     print(prompt)
-    print("</prompt>)
+    print("</prompt>")
