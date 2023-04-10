@@ -20,7 +20,7 @@ def extract_functions(source: str) -> list:
     return functions
 
 
- def map_project() -> dict:
+def map_project() -> dict:
     """
     Traverse the current directory and its subdirectories, identifying all files with a `.py` extension and generating a
     mapping from each file name to its relative path, the number of tokens it contains, its docstring (if any), and the
