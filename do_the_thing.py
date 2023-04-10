@@ -104,6 +104,61 @@ class Agent:
         # create pull request here
         self.history.append(pr_message)
 
+        
+#########################################################################################
+
+def take_notes(plan_step, file_path):
+    """
+    Given a plan step and a file path, returns a dictionary of notes about the file relevant to the plan step.
+    
+    The function should perform the following operations:
+    
+    1. Parse the file at the given file path using the `ast` module.
+    2. Extract all function definitions from the parsed code using the `extract_functions` function.
+    3. Create a dictionary of notes with the following keys:
+        - "file_path": the file path
+        - "num_tokens": the number of tokens in the code
+        - "docstring": the docstring of the module (if any)
+        - "functions": a list of function names and arguments extracted from the code
+        - "relevant": a boolean indicating whether any of the functions in the file are relevant to the current plan step
+        - "changes": a list of planned changes to the file for the current plan step
+    
+    The function should return the dictionary of notes.
+    """
+    pass
+
+
+def necessary_to_modify(file_path):
+    """
+    Given a file path, returns a boolean indicating whether it is necessary to modify the file to address the current plan step.
+    
+    The function should perform the following operations:
+    
+    1. Check if the file at the given file path was marked as relevant in the plan notes.
+    2. If the file was marked as relevant, check if any planned changes were made to the file.
+    3. If any planned changes were made to the file, return True; otherwise, return False.
+    
+    The function should return a boolean.
+    """
+    pass
+
+
+def make_changes(file_path):
+    """
+    Given a file path, modifies the file to address the current plan step.
+    
+    The function should perform the following operations:
+    
+    1. Check if the file at the given file path was marked as relevant in the plan notes.
+    2. If the file was marked as relevant, apply any planned changes to the file using the `ast` module.
+    3. Write the modified code back to the file.
+    
+    The function should not return anything.
+    """
+    pass
+
+
+#########################################################################################
 
 
 if __name__ == '__main__':
