@@ -158,6 +158,21 @@ def make_changes(file_path):
     pass
 
 
+def check_changes_applied(notes: str):
+    """
+    Given a string of notes describing changes to be made to one or more files,
+    checks that all changes were made as described.
+
+    1. Split the notes string into a list of individual notes.
+    2. For each note in the list:
+        a. Extract the relative file path from the note.
+        b. Load the file and parse its contents.
+        c. Extract the line number and line text to be changed from the note.
+        d. Verify that the line number and text in the file match those described in the note.
+    3. If any note fails to match, raise an exception indicating which note(s) failed and how.
+    """
+    pass
+
 #########################################################################################
 
 
