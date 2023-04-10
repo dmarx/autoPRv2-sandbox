@@ -1,3 +1,7 @@
+"""
+Uses an AI agent simulating an SDE to respond to a github issue and generate a PR.
+"""
+
 import sys
 import json
 from loguru import logger
