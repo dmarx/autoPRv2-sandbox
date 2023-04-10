@@ -30,7 +30,11 @@ def map_project() -> dict:
     names and arguments of all functions defined in the file.
     """
     mapping = {}
-    for file in Path('.').rglob('*.*'):
+    #supported_extensions=['.py']
+    #for file in Path('.').rglob('*.*'):
+    for file in Path('.').rglob('*.py'):
+        if not file.is_file():
+            continue
         with open(file) as f:
             source = f.read()
         num_tokens = len(source)
