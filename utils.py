@@ -41,4 +41,4 @@ def map_project() -> dict:
         record += f"functions: {', '.join(functions)}\n"
 
         mapping[file.stem] = record
-   return mapping
+    return mapping
