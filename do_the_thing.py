@@ -13,7 +13,7 @@ def prompt_from_issue(issue: dict):
     return prompt
 
 
-def extract_functions(source):
+def extract_functions(source: str) -> list:
     """
     Given a string of source code, extract the names and arguments of all functions defined in that source code.
 
@@ -29,7 +29,7 @@ def extract_functions(source):
     return functions
 
 
- def map_project():
+ def map_project() -> dict:
     mapping = {}
     for file in Path('.').rglob('*.*'):
         with open(file) as f:
@@ -65,9 +65,13 @@ class Agent:
 
         
     def make_a_plan(self):
-        def think_through(directive, project_map):
-            prompt = f"Here's a summary of the codebase: \n\n{project_map}\n\n"
-            prompt += f"Please generate a plan to address the following directive:\n\n{directive}"
+        def think_through(directive: str, project_map: dict) -> str: 
+            prompt = (
+                f"Here's a summary of our codebase: \n\n{project_map}\n\n"
+                "Please outline a step-by-step plan to address the directive below. "
+                "Each step should appear on a single line, and each such line should begin with \"[STEPINSTRUCTIONS]\" to denote that "
+                f"the rest of that line is the complete instructions for the coresponding step of the plan.\n\n{directive}"
+            )
             response = generate_response(prompt)
             plan = response.choices[0].text.strip()
             return plan
