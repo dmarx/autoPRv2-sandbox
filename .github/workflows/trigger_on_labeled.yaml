@@ -32,8 +32,9 @@ jobs:
       run: | 
         echo "Issue number: ${{ github.event.issue.number }}"
         echo "do the thing"
-        json=$(echo '${{ toJson(github.event.issue) }}' | jq -r '@json')
-        python do_the_thing.py "$json"
+        json=$(echo '${{ toJson(github.event.issue) }}' | jq -c '.')
+        printf -v escaped_json '%q' "$json"
+        python do_the_thing.py "$escaped_json"
       #env:
       #  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
