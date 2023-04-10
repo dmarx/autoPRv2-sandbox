@@ -33,13 +33,9 @@ jobs:
     - name: Do the thing
       run: | 
         echo "Issue number: ${{ github.event.issue.number }}"
-        #echo "Issue title: ${{ github.event.issue.title }}"
-        #echo "Issue body: ${{ github.event.issue.body }}"
         echo "do the thing"
         #python do_the_thing.py issue_details.txt
-        #python do_the_thing.py '${{ toJson(github.event.issue) }}'
-
-        json=$(echo "${{ toJson(github.event.issue) }}" | tr -d '\r')
+        python do_the_thing.py '${{ toJson(github.event.issue) }}'
         python do_the_thing.py "$json"
       #env:
       #  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
