@@ -21,14 +21,19 @@ jobs:
         python-version: 3.8
         #cache: 'pip'
 
-    - name: Install dependencies
+    - name: Install python dependencies
       run: pip install loguru omegaconf openai
+
+    # apparently we need this to properly format the json...
+    - name: Install jq
+      run: sudo apt-get update && sudo apt-get install -y jq
 
     - name: Do the thing
       run: | 
         echo "Issue number: ${{ github.event.issue.number }}"
         echo "do the thing"
-        python do_the_thing.py '${{ toJson(github.event.issue) }}'
+        json=$(echo '${{ toJson(github.event.issue) }}' | jq -r '@json')
+        python do_the_thing.py "$json"
       #env:
       #  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
