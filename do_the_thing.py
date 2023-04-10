@@ -28,4 +28,4 @@ if __name__ == '__main__':
     if author_role != 'OWNER':
         exit()
     agent = Agent(issue)
-    agent.address_issue()
+    #agent.address_issue()
