@@ -57,14 +57,19 @@ class Agent:
 
         
     def make_a_plan(self):
-        def think_through(directive):
-            prompt = f"Please generate a plan to address the following directive:\n\n{directive}"
+        def think_through(directive, project_map):
+            prompt = f"Here's a summary of the codebase: \n\n{project_map}\n\n"
+            prompt += f"Please generate a plan to address the following directive:\n\n{directive}"
             response = generate_response(prompt)
             plan = response.choices[0].text.strip()
             return plan
-        self.state['project_map'] = map_project()
-        self.state['plan'] = think_through(self.state['directive'])
-        self.history.append({'plan': self.state['plan']})
+        directive = self.state['directive']
+        project_map = map_project()
+        plan = think_through(directive, project_map)
+        self.state['project_map'] = project_map
+        self.state['plan'] = plan
+        self.history.append({'project_map': project_map})
+        self.history.append({'plan': plan})
 
     def step_through_plan(self):
         def think_about_files(plan_step):
