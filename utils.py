@@ -47,5 +47,5 @@ def map_project() -> dict:
             record += f"docstring: {docstring}\n"
         record += f"functions: {', '.join(functions)}\n"
 
-        mapping[file.stem] = record
+        mapping[record['path']] = record
     return mapping
