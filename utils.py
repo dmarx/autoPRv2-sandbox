@@ -37,7 +37,7 @@ def map_project() -> dict:
         functions = extract_functions(source)
         docstring = ast.get_docstring(ast.parse(source))
 
-        record = f"relative path: {file.relative_to(Path.cwd())}\n" \
+        record = f"path: {str(file)}\n" \
                  f"number of tokens: {num_tokens}\n"
         if docstring:
             record += f"docstring: {docstring}\n"
