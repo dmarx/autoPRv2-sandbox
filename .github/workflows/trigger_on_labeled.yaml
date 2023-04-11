@@ -31,10 +31,12 @@ jobs:
     - name: Do the thing
       run: | 
         echo "Issue number: ${{ github.event.issue.number }}"
+        echo $LABEL_PAYLOAD
         echo "do the thing"
         python do_the_thing.py "${ISSUE_PAYLOAD}"
       env:
         ISSUE_PAYLOAD: ${{ toJson(github.event.issue) }}
+        LABEL_PAYLOAD: ${{ toJson(github.event.label) }}
       #  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
     - name: Create Pull Request
